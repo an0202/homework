@@ -13,7 +13,7 @@ $ deploy.sh rollback pipline_demo
 当前兼容 CentOS7/RHEL7/AmazonLinux2 系统，其它系统可能会导致安装失败。</br>
 建议使用一台干净的海外虚拟机运行setup.sh脚本。</br>
 deploy.sh需要在Jenkins 容器所属的宿主机运行。</br>
-> 有此类限制的原因主要涉及细节过多，缺少时间打磨
+> 有此类限制的原因主要涉及细节过多,缺少时间打磨
 ### 注意事项
 - 对网络有一定要求，使用了DockerHub,Github,还需从香港服务器下载必要的文件
 - 环境初始化时会在本地注册两个新的用户，并增加sudoers权限
@@ -68,7 +68,9 @@ $ setup.sh rollback java_pipline_demo
 主要使用具有Docker-CE引擎的虚拟机，实现QA环境的部署。</br>
 CI/CD平台采用Jenkins，其也在Docker中运行。通过Pipline控制多阶段发布流程。</br>
 通过ansible以及Shell脚本实现具体的发布功能。</br>
-![拓扑图](./topology.png)
+尽可能避免HardCode，最大限度进行功能解耦。</br>
+
+![架构图](topology.png)
 > 如果架构图不能正常显示, 可以到本项目根目录查看.
 
 ## 写在最后
@@ -86,4 +88,5 @@ CI/CD平台采用Jenkins，其也在Docker中运行。通过Pipline控制多阶�
 ### 其它
 基于应用监控指标，通过HPA实现应用的自动伸缩。</br>
 新版本发布后分析一段时间内4xx,5xx的数量，如超过阈值及时进行自动回滚。</br>
+基于Istio可以实现基于Header的灰度流程，优化QA流程。
 >
