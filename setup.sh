@@ -156,16 +156,14 @@ function install_jenkins {
 
 # Usage
 function usage {
-    echo "### Usage"
-    echo "### Require CENTOS7/RHEL7/AMAZON LINXU2"
-    echo "### Run this scripts by root user"
+    echo "### Require CENTOS7/RHEL7/AMAZON LINUX2"
+    echo "### Please run this scripts by root user"
     echo "### Online Demo: http://shellan.top:8080 username/password: thoughtworks"
     echo "### For more details see : https://github.com/an0202/homework"
     echo "$0 init    -- 'download homework to /data/anjie_homework/ and setup local env, we need this setup first'"
     echo "$0 docker  -- 'install docker-ce on local instance'"
     echo "$0 jenkins -- 'setup jenkins container on local docker engine'"
     echo "$0 all     -- 'setup all on local instance'"
-    exit 0
 }
 
 #
@@ -182,16 +180,16 @@ function main {
     install_jenkins
     ;;
     "all")
+    usage
     init_env
     check_docker
     install_jenkins
     ;;
-    *)
     usage
+    exit 0
     ;;
     esac
 }
 
 #main
 main $@
-
