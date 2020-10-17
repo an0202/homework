@@ -1,0 +1,26 @@
+---
+
+- hosts: qa
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+
+  - name: Login to DockerHub
+    community.general.docker_login:
+      username: shellan
+      password: 97e811ad-9c24-4e17-916d-8d30a37c3fb6
+    tags:
+      - login
+
+  - name: Build an image and push it to dockerhub
+    community.general.docker_image:
+      build:
+        path: /data/jenkins_home/tools/service/{{ job_name }}
+      name: shellan/homework
+      tag: '{{ job_name }}-{{ version }}'
+      push: yes
+      source: build
+    tags:
+      - build

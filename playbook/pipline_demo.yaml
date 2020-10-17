@@ -1,0 +1,25 @@
+---
+
+- hosts: '{{ hosts_group }}'
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  - name: 'Remove old container'
+    community.general.docker_container:
+        name: '{{ job_name }}'
+        state: absent
+    ignore_errors: yes
+    tags:
+      - stop
+
+  - name: 'Start new container'
+    community.general.docker_container:
+        name: '{{ job_name }}'
+        image: 'shellan/homework:{{ version }}'
+        ports:
+         - "8081:80" 
+    tags:
+      - start
+
