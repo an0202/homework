@@ -17,7 +17,7 @@
   - name: Build an image and push it to dockerhub
     community.general.docker_image:
       build:
-        path: /data/jenkins_home/tools/service/{{ job_name }}
+        path: /data/homework_anjie/jenkins_home/tools/service/{{ job_name }}
       name: shellan/homework
       tag: '{{ job_name }}-{{ version }}'
       push: yes
